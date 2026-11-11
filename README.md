@@ -1,6 +1,6 @@
 # Prisjakt historisk lavpris
 
-A vanilla JavaScript Manifest V3 extension for Chrome and Firefox. No build step. Adds Norwegian price comparison badges on Prisjakt category pages (category.php and /c/...), search results (/search), and product.php?p=ID pages.
+A vanilla JavaScript Manifest V3 extension for Chrome and Firefox. No build step. Adds Norwegian price comparison badges on the Prisjakt front page, category pages (category.php and /c/...), search results (/search), and product.php?p=ID pages.
 
 ## Install
 
@@ -40,6 +40,8 @@ Live selector verification found 24 category cards with parseable prices and one
 
 The API is internal and undocumented; api.js isolates it. Site markup may change. The 30% rule is a heuristic and can retain incorrect prices or exclude real discounts; it is not a guarantee of a genuine all-time low. Variants are combined, shipping is not included, and offer filters may change which current prices are rendered. A cached low can be up to 24 hours old. New API data can change the computed low.
 
-Manually load the extension in both browsers and verify category badges, search results, the sample product page, dynamically loaded cards/pagination, product navigation, popup toggle, cache clearing, and tooltips. Browser installation/UI behavior has not been verified by the automated checks. Modern browsers are recommended; Firefox minimum manifest version is 109. Firefox-specific manifest settings may be reported as unsupported by Chrome and are used only by Firefox.
+Manually load the extension in both browsers and verify front-page carousel badges, category badges, search results, the sample product page, dynamically loaded cards/pagination, product navigation, popup toggle, cache clearing, and tooltips. Browser installation/UI behavior has not been verified by the automated checks. Modern browsers are recommended; Firefox minimum manifest version is 109. Firefox-specific manifest settings may be reported as unsupported by Chrome and are used only by Firefox.
 
 Firefox lint: zero errors. Two compatibility warnings remain because the requested Firefox 109 minimum predates the data_collection_permissions declaration (desktop 140 / Android 142). The declaration is included for current Firefox submission requirements; verify older browser compatibility manually.
+
+Front-page support uses ProductCardProductName links within the Card component. Browser DOM inspection found 131 cards, 128 with displayed prices; unpriced cards are skipped. Repeated products in separate carousels each receive a badge while sharing a history request.

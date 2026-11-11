@@ -35,3 +35,19 @@ test('product offer discovery remains supported',()=>{
  const {targets}=discover('<div data-test="OfferListItem"><h4>8 690 kr</h4></div><div data-test="OfferListItem"><h4>5 990 kr</h4></div>','https://www.prisjakt.no/product.php?p=4220665');
  assert.equal(targets.length,1);assert.equal(targets[0].current,5990);
 });
+
+// Carousel cards on the homepage omit the ProductGridCard test marker.
+const homeCard = id => searchCard(id).replace('data-test="ProductGridCard"','data-sentry-component="Card"');
+test('homepage carousels support repeated products and skip unpriced cards',()=>{
+ const unpriced = '<div data-sentry-component="Card"><a data-test="ProductCardProductName" href="/product.php?p=123">Unavailable</a></div>';
+ const {document,pj,targets}=discover('<section>'+homeCard('4815333')+homeCard('4815333')+unpriced+'</section><div data-sentry-component="Card"><a href="/kampanjer/deal">Campaign</a><p>100 kr</p></div>','https://www.prisjakt.no/');
+ assert.equal(pj.pageType(),'listing');assert.equal(targets.length,2);
+ assert.ok(targets.every(t=>t.current===5972 && t.id==='4815333'));
+ assert.notEqual(targets[0].root,targets[1].root);
+ document.querySelector('section').insertAdjacentHTML('beforeend',homeCard('1641609'));
+ assert.equal(pj.discover().length,3);
+});
+test('modern cards carrying both markers are only discovered once',()=>{
+ const {targets}=discover(searchCard().replace('data-test="ProductGridCard"','data-test="ProductGridCard" data-sentry-component="Card"'));
+ assert.equal(targets.length,1);
+});

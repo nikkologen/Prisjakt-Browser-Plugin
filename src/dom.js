@@ -3,13 +3,21 @@
   pj.pageType = () => {
     const url = new URL(location.href);
     if (url.pathname === '/product.php' && /^\d+$/.test(url.searchParams.get('p'))) return 'product';
-    if (url.pathname === '/category.php' || url.pathname.startsWith('/c/') || url.pathname === '/search') return 'listing';
+    if (url.pathname === '/' || url.pathname === '/category.php' || url.pathname.startsWith('/c/') || url.pathname === '/search') return 'listing';
     return null;
   };
   pj.discover = () => {
     const targets = [];
     if (!pj.pageType()) return targets;
-    for (const card of document.querySelectorAll('[data-test="ProductGridCard"]')) {
+    const cards = new Set(document.querySelectorAll('[data-test="ProductGridCard"]'));
+    // Home-page carousels omit ProductGridCard, but retain the product-name
+    // marker and Card boundary. Anchor discovery to a product, not generic cards.
+    for (const link of document.querySelectorAll('a[data-test="ProductCardProductName"][href*="product.php?p="]')) {
+      if (link.closest('[data-test="ProductGridCard"]')) continue;
+      const card = link.closest('[data-sentry-component="Card"]');
+      if (card) cards.add(card);
+    }
+    for (const card of cards) {
       // Legacy listings also label the enclosing li; process only the inner card.
       if (card.querySelector('[data-test="ProductGridCard"]')) continue;
       const link = card.querySelector('a[href*="product.php?p="]');
