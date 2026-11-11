@@ -9,10 +9,14 @@
   pj.discover = () => {
     const targets = [];
     if (!pj.pageType()) return targets;
-    for (const card of document.querySelectorAll('article[data-test="ProductGridCard"]')) {
+    for (const card of document.querySelectorAll('[data-test="ProductGridCard"]')) {
+      // Legacy listings also label the enclosing li; process only the inner card.
+      if (card.querySelector('[data-test="ProductGridCard"]')) continue;
       const link = card.querySelector('a[href*="product.php?p="]');
       const id = link && new URL(link.getAttribute('href'), location.href).searchParams.get('p');
-      const price = [...card.querySelectorAll('[data-test="ProductPrice"], [class*="StyledPrice"]')].find(el => pj.parsePriceText(el.textContent) !== null);
+      // Search uses the new Price component. Keep discovery inside that component
+      // so a cheaper UsedBadge or a shop count cannot become the current price.
+      const price = [...card.querySelectorAll('[data-test="ProductPrice"], [class*="StyledPrice"], [data-sentry-component="Price"] p')].find(el => pj.parsePriceText(el.textContent) !== null);
       if (id && /^\d+$/.test(id) && price) targets.push({root:card, price, id, current:pj.parsePriceText(price.textContent)});
     }
     if (pj.pageType() === 'product') {

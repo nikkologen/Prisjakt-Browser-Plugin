@@ -34,7 +34,7 @@ Regenerate PNG icons with node scripts/generate-icons.cjs. Runtime files require
 
 The real fixture test/fixtures/4220665.json was downloaded on 11 November 2026 from the ALL endpoint (413 points). With the specified rules its low is **3,848 kr**, Christiania Glasmagasin, 12 June 2023 (393 retained points). The earlier expected ~5,990 kr does not agree with this response. The fixture is preserved in full rather than trimming away qualifying lower prices. The erroneous 179 kr point is excluded.
 
-Live selector verification found 24 category cards with parseable prices and one product target at 5,990 kr. Category cards use article[data-test="ProductGridCard"], product.php links and StyledPrice class fallback. Product pages use [data-test="OfferListItem"] h4, selecting the lowest rendered offer price. Search returned HTTP 403 to automated fetching; the shared listing selectors remain unverified on search. The smoke script reports blocked pages and exits nonzero rather than claiming success.
+Live selector verification found 24 category cards with parseable prices and one product target at 5,990 kr. Category cards use article[data-test="ProductGridCard"], product.php links and StyledPrice class fallback. Product pages use [data-test="OfferListItem"] h4, selecting the lowest rendered offer price. Search returned HTTP 403 to automated fetching. Browser DOM inspection subsequently verified 50 search cards: these use div[data-test="ProductGridCard"] and [data-sentry-component="Price"] p rather than the legacy article/StyledPrice markup. Both layouts are supported; nested card wrappers and cheaper used-offer badges are excluded. The smoke script reports blocked pages and exits nonzero rather than claiming success.
 
 ## Limitations and browser checklist
 
