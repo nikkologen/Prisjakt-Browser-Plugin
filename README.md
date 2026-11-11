@@ -24,6 +24,12 @@ Requests run eagerly with a concurrency limit of four per tab. Product IDs are d
 
 ## Development and verification
 
+To create the store upload ZIP, run `./scripts/package.ps1` in PowerShell.
+The script works from any working directory and writes
+`dist/prisjakt-historical-low-<version>.zip`, using the version in manifest.json.
+It includes only manifest.json, src/, popup/, and icons/, with the manifest at
+the ZIP root. Running it again replaces the ZIP for that version.
+
 Node is needed only for development. Run npm ci for the development-only HTML parser, then:
 
     node --test test/
