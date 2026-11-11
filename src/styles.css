@@ -1,0 +1,4 @@
+.pj-low-badge { display:inline-block; margin:3px 0 3px 7px; padding:3px 7px; border-radius:5px; background:#e9edf1; color:#39424d; font:600 11px/1.4 system-ui,sans-serif; vertical-align:middle; white-space:nowrap; }
+.pj-low-badge.pj-low-green { background:#dcf5df; color:#145c29; }
+.pj-low-badge.pj-low-yellow { background:#fff0be; color:#714e00; }
+.pj-low-badge.pj-low-red { background:#ffe0df; color:#8b2220; }

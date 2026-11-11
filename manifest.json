@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "Prisjakt historisk lavpris",
+  "version": "1.0.0",
+  "description": "Sammenlign dagens pris med historisk laveste pris på Prisjakt.",
+  "permissions": [
+    "storage"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "prisjakt-low@example.com",
+      "strict_min_version": "109.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.prisjakt.no/*"
+      ],
+      "js": [
+        "src/api.js",
+        "src/stats.js",
+        "src/cache.js",
+        "src/queue.js",
+        "src/dom.js",
+        "src/content.js"
+      ],
+      "css": [
+        "src/styles.css"
+      ]
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html"
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  }
+}

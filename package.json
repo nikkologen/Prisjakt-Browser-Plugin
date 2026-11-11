@@ -1,0 +1,12 @@
+{
+  "name": "prisjakt-historical-low",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "node --test test/",
+    "smoke": "node scripts/smoke.cjs"
+  },
+  "devDependencies": {
+    "linkedom": "^0.18.15"
+  }
+}
