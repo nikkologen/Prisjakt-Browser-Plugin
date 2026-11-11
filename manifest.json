@@ -39,9 +39,9 @@
     "default_popup": "popup/popup.html"
   },
   "icons": {
-    "16": "icons/16.png",
-    "32": "icons/32.png",
-    "48": "icons/48.png",
-    "128": "icons/128.png"
+    "16": "icons/spyglass-16.png",
+    "32": "icons/spyglass-32.png",
+    "48": "icons/spyglass-48.png",
+    "128": "icons/spyglass-128.png"
   }
 }
