@@ -4,6 +4,8 @@ A vanilla JavaScript Manifest V3 extension for Chrome and Firefox. No build step
 
 ## Install
 
+For store reviewers, see [the step-by-step reviewer guide](REVIEWER_GUIDE.md).
+
 - Chrome: open chrome://extensions, enable **Developer mode**, choose **Load unpacked**, and select this repository folder.
 - Firefox: open about:debugging#/runtime/this-firefox, choose **Load Temporary Add-on**, then select manifest.json. Temporary add-ons disappear after restarting Firefox; permanent installation requires Mozilla signing.
 
