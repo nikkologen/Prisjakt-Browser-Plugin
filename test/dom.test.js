@@ -44,6 +44,20 @@ test('daily deals route supports filters, pagination and a trailing slash',()=>{
   assert.equal(pj.pageType(),'listing');assert.equal(targets.length,1);assert.equal(targets[0].current,5972);
  }
 });
+test('all theme routes support products, including future campaign URLs',()=>{
+ for (const path of ['/tema','/tema/','/tema/black-friday','/tema/new-campaign/collection?sort=price']) {
+  const {pj,targets}=discover(searchCard(), 'https://www.prisjakt.no'+path);
+  assert.equal(pj.pageType(),'listing');assert.equal(targets.length,1);
+ }
+});
+test('theme pages without products are ignored and similarly named routes stay excluded',()=>{
+ const {targets}=discover('<article><a href="/artikler/deal">Campaign story</a><p>100 kr</p></article>', 'https://www.prisjakt.no/tema/new-story');
+ assert.equal(targets.length,0);
+ for (const path of ['/tematisk','/tema-other']) {
+  const {pj,targets}=discover(searchCard(), 'https://www.prisjakt.no'+path);
+  assert.equal(pj.pageType(),null);assert.equal(targets.length,0);
+ }
+});
 test('homepage carousels support repeated products and skip unpriced cards',()=>{
  const unpriced = '<div data-sentry-component="Card"><a data-test="ProductCardProductName" href="/product.php?p=123">Unavailable</a></div>';
  const {document,pj,targets}=discover('<section>'+homeCard('4815333')+homeCard('4815333')+unpriced+'</section><div data-sentry-component="Card"><a href="/kampanjer/deal">Campaign</a><p>100 kr</p></div>','https://www.prisjakt.no/');
