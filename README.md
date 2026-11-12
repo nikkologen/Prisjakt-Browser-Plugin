@@ -38,7 +38,7 @@ Node is needed only for development. Run npm ci for the development-only HTML pa
     node scripts/smoke.cjs
     npx web-ext lint --source-dir . --ignore-files "node_modules/**" "test/**" "scripts/**" "package*.json"
 
-Regenerate PNG icons with node scripts/generate-icons.cjs. Runtime files require no npm dependencies. Content scripts load in manifest order and share an isolated PJLow namespace.
+The extension uses the spyglass PNG icons in icons/ at 16, 32, 48, and 128 pixels. Runtime files require no npm dependencies. Content scripts load in manifest order and share an isolated PJLow namespace.
 
 The real fixture test/fixtures/4220665.json was downloaded on 11 November 2026 from the ALL endpoint (413 points). With the specified rules its low is **3,848 kr**, Christiania Glasmagasin, 12 June 2023 (393 retained points). The earlier expected ~5,990 kr does not agree with this response. The fixture is preserved in full rather than trimming away qualifying lower prices. The erroneous 179 kr point is excluded.
 
