@@ -38,6 +38,12 @@ test('product offer discovery remains supported',()=>{
 
 // Carousel cards on the homepage omit the ProductGridCard test marker.
 const homeCard = id => searchCard(id).replace('data-test="ProductGridCard"','data-sentry-component="Card"');
+test('daily deals route supports filters, pagination and a trailing slash',()=>{
+ for (const path of ['/tema/dagens-tilbud','/tema/dagens-tilbud/','/tema/dagens-tilbud?page=2&category=502']) {
+  const {pj,targets}=discover(searchCard(), 'https://www.prisjakt.no'+path);
+  assert.equal(pj.pageType(),'listing');assert.equal(targets.length,1);assert.equal(targets[0].current,5972);
+ }
+});
 test('homepage carousels support repeated products and skip unpriced cards',()=>{
  const unpriced = '<div data-sentry-component="Card"><a data-test="ProductCardProductName" href="/product.php?p=123">Unavailable</a></div>';
  const {document,pj,targets}=discover('<section>'+homeCard('4815333')+homeCard('4815333')+unpriced+'</section><div data-sentry-component="Card"><a href="/kampanjer/deal">Campaign</a><p>100 kr</p></div>','https://www.prisjakt.no/');

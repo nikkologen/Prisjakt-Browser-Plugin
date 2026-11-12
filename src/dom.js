@@ -3,6 +3,7 @@
   pj.pageType = () => {
     const url = new URL(location.href);
     if (url.pathname === '/product.php' && /^\d+$/.test(url.searchParams.get('p'))) return 'product';
+    if (/^\/tema\/dagens-tilbud\/?$/.test(url.pathname)) return 'listing';
     if (url.pathname === '/' || url.pathname === '/category.php' || url.pathname.startsWith('/c/') || url.pathname === '/search') return 'listing';
     return null;
   };

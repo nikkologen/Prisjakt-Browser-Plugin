@@ -1,6 +1,6 @@
 # Prisjakt historisk lavpris
 
-A vanilla JavaScript Manifest V3 extension for Chrome and Firefox. No build step. Adds Norwegian price comparison badges on the Prisjakt front page, category pages (category.php and /c/...), search results (/search), and product.php?p=ID pages.
+A vanilla JavaScript Manifest V3 extension for Chrome and Firefox. No build step. Adds Norwegian price comparison badges on the Prisjakt front page, daily deals (/tema/dagens-tilbud), category pages (category.php and /c/...), search results (/search), and product.php?p=ID pages.
 
 ## Install
 

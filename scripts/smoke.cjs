@@ -7,7 +7,7 @@ const os = require('node:os');
 const path = require('node:path');
 async function main() {
  let blocked = false;
- for (const [name,url] of Object.entries({home:'https://www.prisjakt.no/',category:'https://www.prisjakt.no/category.php?k=502',search:'https://www.prisjakt.no/search?query=kaffemaskin',product:'https://www.prisjakt.no/product.php?p=4220665'})) {
+ for (const [name,url] of Object.entries({deals:'https://www.prisjakt.no/tema/dagens-tilbud',home:'https://www.prisjakt.no/',category:'https://www.prisjakt.no/category.php?k=502',search:'https://www.prisjakt.no/search?query=kaffemaskin',product:'https://www.prisjakt.no/product.php?p=4220665'})) {
   const response = await fetch(url);
   const html = await response.text();
   if(!response.ok) {console.error(name + ': HTTP ' + response.status + '; browser verification required'); blocked = true; continue;}
