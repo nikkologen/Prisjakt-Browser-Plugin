@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Prisjakt historisk lavpris",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Sammenlign dagens pris med historisk laveste pris på Prisjakt.",
   "permissions": [
     "storage"
